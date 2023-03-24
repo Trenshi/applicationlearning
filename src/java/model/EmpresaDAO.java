@@ -41,7 +41,7 @@ public class EmpresaDAO {
             manager.persist(dep);
             manager.getTransaction().commit();
             return 1; // Departamento cadastrado
-        } catch (EntityExistsException ex) {
+        } catch (RollbackException ex) {
             return 2; // Já cadastrado
         } catch (Exception ex) {
             return 3; //Deu qualquer outro erro
