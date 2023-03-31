@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -78,6 +79,13 @@ public class Controle extends HttpServlet {
             request.setAttribute("m", mensagem);
             RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
             disp.forward(request, response);
+        } else if (flag.equalsIgnoreCase("listarDepartamentos")) {
+            List<Departamento> departamentos = new EmpresaDAO().listarDepartamentos();
+            request.setAttribute("listarDepartamentos", departamentos);
+            RequestDispatcher disp = request.getRequestDispatcher("ListarDepartamentos.jsp");
+            disp.forward(request, response);
+        } else if (flag.equalsIgnoreCase("consultarDepartamento")) {
+            //TODO
         }
     } // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 

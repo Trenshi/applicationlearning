@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,7 +19,6 @@ public class EmpresaDAO {
     public void conectar() {
         conn = Persistence.createEntityManagerFactory("SitePU");
         manager = conn.createEntityManager();
-
     }
 
     public Acesso validarLogin(String u, String s) {
@@ -46,6 +46,16 @@ public class EmpresaDAO {
         } catch (Exception ex) {
             return 3; //Deu qualquer outro erro
         }
-
+    }
+    
+    public List<Departamento> listarDepartamentos() {
+        conectar();
+        try {
+            TypedQuery<Departamento> query = manager.createNamedQuery("Departamento.findAll", Departamento.class);
+            List<Departamento> departamentos = query.getResultList();
+            return departamentos;
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

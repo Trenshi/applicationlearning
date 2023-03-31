@@ -28,7 +28,7 @@
                         <a href="CadastroDepartamento.html" target="conteudo">Incluir</a>
                         <a href="AlterarDepartamento.html" target="conteudo">Alterar</a>
                         <a href="ConsultarDepartamento.html" target="conteudo">Consultar</a>
-                        <a href="ListarDepartamento.html" target="conteudo">Listar</a>
+                        <a href="Controle?flag=listarDepartamentos" target="conteudo">Listar</a>
                         <a href="ExcluirDepartamento.html" target="conteudo">Excluir</a>
                     </div>
                 </div> 
