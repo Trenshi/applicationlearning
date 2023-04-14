@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
     @NamedQuery(name = "Departamento.findByIdDepartamento", query = "SELECT d FROM Departamento d WHERE d.idDepartamento = :idDepartamento"),
-    @NamedQuery(name = "Departamento.findByNomeDepartamento", query = "SELECT d FROM Departamento d WHERE d.nomeDepartamento = :nomeDepartamento"),
+    @NamedQuery(name = "Departamento.findByNomeDepartamento", query = "SELECT d FROM Departamento d WHERE d.nomeDepartamento LIKE :nomeDepartamento"),
     @NamedQuery(name = "Departamento.findByFoneDepartamento", query = "SELECT d FROM Departamento d WHERE d.foneDepartamento = :foneDepartamento")})
 public class Departamento implements Serializable {
 

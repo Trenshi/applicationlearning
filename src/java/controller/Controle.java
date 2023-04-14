@@ -84,9 +84,29 @@ public class Controle extends HttpServlet {
             request.setAttribute("listarDepartamentos", departamentos);
             RequestDispatcher disp = request.getRequestDispatcher("ListarDepartamentos.jsp");
             disp.forward(request, response);
-        } else if (flag.equalsIgnoreCase("consultarDepartamento")) {
-            //TODO
-        }
+        } else if (flag.equalsIgnoreCase("ConsultarDepartamento")) {
+            String nomeDep = request.getParameter("nomeDepartamento");
+            EmpresaDAO dao = new EmpresaDAO();
+            List<Departamento> departamentos = dao.consultarDepartamentos(nomeDep);
+            request.setAttribute("listarDepartamentos", departamentos);
+            RequestDispatcher disp = request.getRequestDispatcher("ListarDepartamentos.jsp");
+            disp.forward(request, response);
+        } else if (flag.equalsIgnoreCase("ExcluirDepartamento")) {
+            String idDep = request.getParameter("idDep");
+            EmpresaDAO dao = new EmpresaDAO();
+            int resultado = dao.excluirDepartamento(idDep);
+            if (resultado == 1) {
+                mensagem = "Departamento excluído com sucesso.";
+            } else {
+                mensagem = "Erro ao tentar excluir o departamento.";
+            }
+            request.setAttribute("m", mensagem);
+            RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
+            disp.forward(request, response);
+        } else if (flag.equalsIgnoreCase("EditarDepartamento")) {
+            String idDep = request.getParameter("idDep");
+
+        } 
     } // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**

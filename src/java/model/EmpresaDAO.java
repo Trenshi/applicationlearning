@@ -58,4 +58,30 @@ public class EmpresaDAO {
             return null;
         }
     }
+    
+    public List<Departamento> consultarDepartamentos(String nomeDep) {
+        conectar();
+        try {
+            TypedQuery<Departamento> query = manager.createNamedQuery("Departamento.findByNomeDepartamento", Departamento.class);
+            query.setParameter("nomeDepartamento", "%" + nomeDep + "%");
+            List<Departamento> departamentos = query.getResultList();
+            return departamentos;
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
+    
+        public int excluirDepartamento(String idDep) {
+        conectar();
+        Departamento dep = manager.find(Departamento.class, idDep);
+        dep.setIdDepartamento(idDep);
+        try {
+            manager.getTransaction().begin();
+            manager.remove(dep);
+            manager.getTransaction().commit();
+            return 1; // Deu certo
+        } catch (Exception ex) {
+            return 0; //Deu qualquer erro
+        }
+    }
 }

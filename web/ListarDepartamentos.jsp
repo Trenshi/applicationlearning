@@ -22,6 +22,8 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Exclusão</th>
+                <th>Edição</th>
             </tr>
             <%
             for(Departamento departamento : listarDepartamentos) {
@@ -30,6 +32,8 @@
                 <td><%=  departamento.getIdDepartamento() %></td>
                 <td><%=  departamento.getNomeDepartamento() %></td>
                 <td><%=  departamento.getFoneDepartamento() %></td>
+                <td><a href="Controle?flag=ExcluirDepartamento&idDep=<%= departamento.getIdDepartamento() %>">Excluir</a></td>
+                <td><a href="Controle?flag=EditarDepartamento&idDep=<%= departamento.getIdDepartamento() %>">Editar</a></td>
             </tr>
             <%
             }
