@@ -47,7 +47,7 @@ public class EmpresaDAO {
             return 3; //Deu qualquer outro erro
         }
     }
-    
+
     public List<Departamento> listarDepartamentos() {
         conectar();
         try {
@@ -58,7 +58,7 @@ public class EmpresaDAO {
             return null;
         }
     }
-    
+
     public List<Departamento> consultarDepartamentos(String nomeDep) {
         conectar();
         try {
@@ -70,14 +70,32 @@ public class EmpresaDAO {
             return null;
         }
     }
-    
-        public int excluirDepartamento(String idDep) {
+
+    public int excluirDepartamento(String idDep) {
         conectar();
-        Departamento dep = manager.find(Departamento.class, idDep);
-        dep.setIdDepartamento(idDep);
         try {
+            Departamento dep = manager.find(Departamento.class, idDep);
+            if (dep == null) {
+                return 2;
+            } else {
+                manager.getTransaction().begin();
+                manager.remove(dep);
+                manager.getTransaction().commit();
+                return 1; // Deu certo
+            }
+        } catch (Exception ex) {
+            return 0; //Deu qualquer erro
+        }
+    }
+
+    public int alterarDepartamento(String idDep, String nomeDep, String foneDep) {
+        conectar();
+        try {
+            Departamento dep = manager.find(Departamento.class, idDep);
+            dep.setNomeDepartamento(nomeDep);
+            dep.setFoneDepartamento(foneDep);
             manager.getTransaction().begin();
-            manager.remove(dep);
+            manager.merge(dep);
             manager.getTransaction().commit();
             return 1; // Deu certo
         } catch (Exception ex) {

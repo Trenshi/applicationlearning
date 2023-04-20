@@ -97,15 +97,28 @@ public class Controle extends HttpServlet {
             int resultado = dao.excluirDepartamento(idDep);
             if (resultado == 1) {
                 mensagem = "Departamento excluído com sucesso.";
+            } else if (resultado == 2) {
+                mensagem = "Departamento com ID de " + idDep + " não existe.";
             } else {
                 mensagem = "Erro ao tentar excluir o departamento.";
             }
             request.setAttribute("m", mensagem);
             RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
             disp.forward(request, response);
-        } else if (flag.equalsIgnoreCase("EditarDepartamento")) {
+        } else if (flag.equalsIgnoreCase("AlterarDepartamento")) {
             String idDep = request.getParameter("idDep");
-
+            String nomeDep = request.getParameter("nomeDep");
+            String foneDep = request.getParameter("foneDep");
+            EmpresaDAO dao = new EmpresaDAO();
+            int resultado = dao.alterarDepartamento(idDep, nomeDep, foneDep);
+            if (resultado == 1) {
+                mensagem = "Departamento alterado com sucesso.";
+            } else {
+                mensagem = "Erro ao tentar alterar o departamento.";
+            }
+            request.setAttribute("m", mensagem);
+            RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
+            disp.forward(request, response);
         } 
     } // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
