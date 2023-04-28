@@ -119,7 +119,21 @@ public class Controle extends HttpServlet {
             request.setAttribute("m", mensagem);
             RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
             disp.forward(request, response);
-        } 
+        } else if (flag.equalsIgnoreCase("BuscarDepartamento")) {
+            // Buscar o departamento pelo ID para alteração.
+            String idDep = request.getParameter("idDep");
+            EmpresaDAO dao = new EmpresaDAO();
+            Departamento dep = dao.buscarDepartamento(idDep);
+            if (dep == null) {
+            request.setAttribute("m", "Departamento não encontrado");
+            RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
+            disp.forward(request, response);
+            } else {
+            request.setAttribute("dep", dep);
+            RequestDispatcher disp = request.getRequestDispatcher("AlterarDepartamentoById.jsp");
+            disp.forward(request, response);
+            }
+        }
     } // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**

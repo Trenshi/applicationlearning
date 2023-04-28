@@ -102,4 +102,15 @@ public class EmpresaDAO {
             return 0; //Deu qualquer erro
         }
     }
+
+    public Departamento buscarDepartamento(String idDep) {
+        conectar();
+        try {
+            Departamento dep = manager.find(Departamento.class, idDep);
+            return dep;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }
+

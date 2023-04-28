@@ -1,6 +1,4 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,7 +35,7 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="CadastroFuncionario.html" target="conteudo">Incluir</a>
+                        <a href="ControleFuncionario?flag=BuscarDepartamento" target="conteudo">Incluir</a>
                         <a href="AlterarFuncionario.html" target="conteudo">Alterar</a>
                         <a href="ConsultarFuncionario.html" target="conteudo">Consultar</a>
                         <a href="ListarFuncionario.html" target="conteudo">Listar</a>
