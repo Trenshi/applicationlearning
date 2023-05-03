@@ -12,7 +12,7 @@ MySQL Connector Drive version: 8.0.17
 https://dev.mysql.com/downloads/connector/j/ 
 
 You probably will have to change your connection URL too in the Controller Servlet, but you can try the follow:      
-jdbc:mysql://localhost:{port}/site?useTimezone=true&serverTimezone=UTC
+jdbc:mysql://localhost:{port}/empresa?useTimezone=true&serverTimezone=UTC
 
 
 
