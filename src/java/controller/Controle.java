@@ -129,7 +129,7 @@ public class Controle extends HttpServlet {
             RequestDispatcher disp = request.getRequestDispatcher("AlterarDepartamentoById.jsp");
             disp.forward(request, response);
             }
-        }
+        } 
     } // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**

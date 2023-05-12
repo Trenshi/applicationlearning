@@ -112,5 +112,46 @@ public class EmpresaDAO {
             return null;
         }
     }
-}
 
+    public int salvarFuncionario(Funcionario func) {
+        conectar();
+        try {
+            manager.getTransaction().begin();
+            manager.persist(func);
+            manager.getTransaction().commit();
+            return 1; // Departamento cadastrado
+        } catch (RollbackException ex) {
+            return 2; // Já cadastrado
+        } catch (Exception ex) {
+            return 3; //Deu qualquer outro erro
+        }
+    }
+
+    public List<Funcionario> listarFuncionarios() {
+        conectar();
+        try {
+            TypedQuery<Funcionario> query = manager.createNamedQuery("Funcionario.findAll", Funcionario.class);
+            List<Funcionario> funcionarios = query.getResultList();
+            return funcionarios;
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
+
+    public int excluirFuncionario(String emailFuncionario) {
+        conectar();
+        try {
+            Funcionario funcionario = manager.find(Funcionario.class, emailFuncionario);
+            if (funcionario == null) {
+                return 2;
+            } else {
+                manager.getTransaction().begin();
+                manager.remove(funcionario);
+                manager.getTransaction().commit();
+                return 1; // Deu certo
+            }
+        } catch (Exception ex) {
+            return 0; //Deu qualquer erro
+        }
+    }
+}
