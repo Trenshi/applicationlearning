@@ -1,10 +1,4 @@
-<%-- 
-    Document   : ListarDepartamentos
-    Created on : 31 de mar. de 2023, 09:42:53
-    Author     : victor.hemcruz
---%>
-
-<%@page import="model.Departamento"%>
+<%@page import="model.entity.Departamento"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,7 +26,7 @@
                 <td><%=  departamento.getIdDepartamento() %></td>
                 <td><%=  departamento.getNomeDepartamento() %></td>
                 <td><%=  departamento.getFoneDepartamento() %></td>
-                <td><a href="Controle?flag=ExcluirDepartamento&idDep=<%= departamento.getIdDepartamento() %>">Excluir</a></td>
+                <td><a href="ControleDepartamento?flag=ExcluirDepartamento&idDep=<%= departamento.getIdDepartamento() %>">Excluir</a></td>
                 <td><a href="AlterarDepartamento.jsp?idDep=<%= departamento.getIdDepartamento() %>&nomeDep=<%= departamento.getNomeDepartamento() %>&foneDep=<%= departamento.getFoneDepartamento() %>">Alterar</a></td>
             </tr>
             <%

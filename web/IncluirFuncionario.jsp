@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="model.Departamento"%>
+<%@page import="model.entity.Departamento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

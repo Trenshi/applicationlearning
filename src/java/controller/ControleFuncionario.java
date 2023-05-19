@@ -1,17 +1,15 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Departamento;
-import model.EmpresaDAO;
-import model.Funcionario;
+import model.entity.Departamento;
+import model.dao.EmpresaDAO;
+import model.entity.Funcionario;
 
 @WebServlet(name = "ControleFuncionario", urlPatterns = {"/ControleFuncionario"})
 public class ControleFuncionario extends HttpServlet {
@@ -22,61 +20,56 @@ public class ControleFuncionario extends HttpServlet {
         String flag = request.getParameter("flag");
         EmpresaDAO dao = new EmpresaDAO();
         Funcionario func = new Funcionario();
+        RequestDispatcher disp = null;
         String mensagem;
         if (flag.equalsIgnoreCase("BuscarDepartamento")) {
             // Buscar os departamentos cadastrados para carregar no cadastro dos funcionários
-            List<Departamento> departamentos = dao.listarDepartamentos();
-            request.setAttribute("departamentos", departamentos);
-            RequestDispatcher disp = request.getRequestDispatcher("IncluirFuncionario.jsp");
-            disp.forward(request, response);
+            request.setAttribute("departamentos", dao.listarDepartamentos());
+            disp = request.getRequestDispatcher("IncluirFuncionario.jsp");
         } else if (flag.equalsIgnoreCase("IncluirFuncionario")) {
             //Salva os dados do funcionário digitados na página InserirFuncionário
-            String email, nome, cargo, idDep;
-            Double salario;
-            email = request.getParameter("email");
-            nome = request.getParameter("nome");
-            cargo = request.getParameter("cargo");
-            salario = Double.parseDouble(request.getParameter("salario"));
-            idDep = request.getParameter("idDep");
-            //
-            func.setEmailFuncionario(email);
-            func.setNomeFuncionario(nome);
-            func.setCargoFuncionario(cargo);
-            func.setSalarioFuncionario(salario);
+            func.setEmailFuncionario(request.getParameter("email"));
+            func.setNomeFuncionario(request.getParameter("nome"));
+            func.setCargoFuncionario(request.getParameter("cargo"));
+            func.setSalarioFuncionario(Double.parseDouble(request.getParameter("salario")));
             Departamento dep = new Departamento();
-            dep.setIdDepartamento(idDep);
+            dep.setIdDepartamento(request.getParameter("idDep"));
             func.setIdDepartamento(dep);
-            int resultado = dao.salvarFuncionario(func);
-            if (resultado == 1) {
-                mensagem = "Funcionário cadastrado com sucesso";
-            } else if (resultado == 2) {
-                mensagem = "Funcionário já cadastrado";
-            } else {
-                mensagem = "Erro ao cadastrar funcionário";
+            int resultado = dao.salvar(func);
+            switch (resultado) {
+                case 1:
+                    mensagem = "Funcionário cadastrado com sucesso";
+                    break;
+                case 2:
+                    mensagem = "Funcionário já cadastrado";
+                    break;
+                default:
+                    mensagem = "Erro ao cadastrar funcionário";
+                    break;
             }
             request.setAttribute("m", mensagem);
-            RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
-            disp.forward(request, response);
+            disp = request.getRequestDispatcher("Mensagens.jsp");
         } else if (flag.equalsIgnoreCase("listarFuncionarios")) {
-            List<Funcionario> funcionarios = new EmpresaDAO().listarFuncionarios();
-            request.setAttribute("listarFuncionarios", funcionarios);
-            RequestDispatcher disp = request.getRequestDispatcher("ListarFuncionarios.jsp");
-            disp.forward(request, response);
+            request.setAttribute("listarFuncionarios", dao.listarFuncionarios());
+            disp = request.getRequestDispatcher("ListarFuncionarios.jsp");
         } else if (flag.equalsIgnoreCase("ExcluirFuncionario")) {
             //Exclui o funcionário selecionado na listagem
-            String emailFuncionario = request.getParameter("emailFuncionario");
-            int resultado = dao.excluirFuncionario(emailFuncionario);
-            if (resultado == 1) {
-                mensagem = "Funcionário excluído com sucesso.";
-            } else if (resultado == 2) {
-                mensagem = "Funcionário com Email de " + emailFuncionario + " não existe.";
-            } else {
-                mensagem = "Erro ao tentar excluir o funcionário.";
+            int resultado = dao.excluirFuncionario(request.getParameter("emailFuncionario"));
+            switch (resultado) {
+                case 1:
+                    mensagem = "Funcionário excluído com sucesso.";
+                    break;
+                case 2:
+                    mensagem = "Funcionário com Email de " + request.getParameter("emailFuncionario") + " não existe.";
+                    break;
+                default:
+                    mensagem = "Erro ao tentar excluir o funcionário.";
+                    break;
             }
             request.setAttribute("m", mensagem);
-            RequestDispatcher disp = request.getRequestDispatcher("Mensagens.jsp");
-            disp.forward(request, response);
-        }   
+            disp = request.getRequestDispatcher("Mensagens.jsp");
+        }
+        disp.forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

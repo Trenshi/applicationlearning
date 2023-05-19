@@ -1,10 +1,4 @@
-<%-- 
-    Document   : ListarDepartamentos
-    Created on : 31 de mar. de 2023, 09:42:53
-    Author     : victor.hemcruz
---%>
-
-<%@page import="model.Funcionario"%>
+<%@page import="model.entity.Funcionario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -6,7 +6,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="Controle">
+        <form method="POST" action="ControleDepartamento">
             <input type="hidden" name="flag" value="AlterarDepartamento">
             <p>
                 <label for="idDep" style="margin-bottom: 30px"> Código: </label>

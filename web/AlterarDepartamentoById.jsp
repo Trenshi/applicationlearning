@@ -1,4 +1,4 @@
-<%@page import="model.Departamento"%>
+<%@page import="model.entity.Departamento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
         <%
             Departamento dep = (Departamento) request.getAttribute("dep");
         %>
-        <form method="POST" action="Controle">
+        <form method="POST" action="ControleDepartamento">
             <input type="hidden" name="flag" value="AlterarDepartamento">
             <p>
                 <label for="idDep" style="margin-bottom: 30px"> Código: </label>
