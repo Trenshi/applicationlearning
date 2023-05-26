@@ -38,13 +38,13 @@ public class ControleFuncionario extends HttpServlet {
             int resultado = dao.salvar(func);
             switch (resultado) {
                 case 1:
-                    mensagem = "Funcionário cadastrado com sucesso";
+                    mensagem = "Funcionário cadastrado com sucesso.";
                     break;
                 case 2:
-                    mensagem = "Funcionário já cadastrado";
+                    mensagem = "Funcionário já cadastrado.";
                     break;
                 default:
-                    mensagem = "Erro ao cadastrar funcionário";
+                    mensagem = "Erro ao cadastrar funcionário.";
                     break;
             }
             request.setAttribute("m", mensagem);
@@ -54,7 +54,7 @@ public class ControleFuncionario extends HttpServlet {
             disp = request.getRequestDispatcher("ListarFuncionarios.jsp");
         } else if (flag.equalsIgnoreCase("ExcluirFuncionario")) {
             //Exclui o funcionário selecionado na listagem
-            int resultado = dao.excluirFuncionario(request.getParameter("emailFuncionario"));
+            int resultado = dao.excluir(new Funcionario(), request.getParameter("emailFuncionario"));
             switch (resultado) {
                 case 1:
                     mensagem = "Funcionário excluído com sucesso.";

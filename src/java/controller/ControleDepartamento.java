@@ -52,7 +52,7 @@ public class ControleDepartamento extends HttpServlet {
             request.setAttribute("listarDepartamentos", dao.consultarDepartamentos(request.getParameter("nomeDepartamento")));
             disp = request.getRequestDispatcher("ListarDepartamentos.jsp");
         } else if (flag.equalsIgnoreCase("ExcluirDepartamento")) {
-            int resultado = dao.excluirDepartamento(request.getParameter("idDep"));
+            int resultado = dao.excluir(new Departamento(), request.getParameter("idDep"));
             switch (resultado) {
                 case 1:
                     mensagem = "Departamento excluído com sucesso.";

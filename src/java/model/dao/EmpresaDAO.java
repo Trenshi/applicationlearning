@@ -60,41 +60,24 @@ public class EmpresaDAO {
             return null;
         }
     }
-
-    public int excluirDepartamento(String idDep) {
+    
+    public <T> int excluir (T classe, String valor) {
         conectar();
         try {
-            Departamento dep = manager.find(Departamento.class, idDep);
-            if (dep == null) {
-                return 2;
+            T obj = (T) manager.find(classe.getClass(), valor);
+            if (obj == null) {
+                return 2; // Não existe
             } else {
                 manager.getTransaction().begin();
-                manager.remove(dep);
+                manager.remove(obj);
                 manager.getTransaction().commit();
-                return 1; // Deu certo
+                return 1; // Excluiu.
             }
         } catch (Exception ex) {
-            return 0; //Deu qualquer erro
+            return 0; // Deu qualquer outro erro
         }
     }
-
-    public int excluirFuncionario(String emailFuncionario) {
-        conectar();
-        try {
-            Funcionario funcionario = manager.find(Funcionario.class, emailFuncionario);
-            if (funcionario == null) {
-                return 2;
-            } else {
-                manager.getTransaction().begin();
-                manager.remove(funcionario);
-                manager.getTransaction().commit();
-                return 1; // Deu certo
-            }
-        } catch (Exception ex) {
-            return 0; //Deu qualquer erro
-        }
-    }
-
+      
     public List<Departamento> consultarDepartamentos(String nomeDep) {
         conectar();
         try {
